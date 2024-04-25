@@ -8,7 +8,6 @@ model = pickle.load(open('model.sav', 'rb'))
 
 st.title('Player Salary Prediction')
 st.sidebar.header('Player Data')
-st.image(image, '')
 
 # FUNCTION
 def user_report():
