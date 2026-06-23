@@ -1,0 +1,45 @@
+# 🧠 AI Judge — Internet Judge
+
+An AI agent that evaluates the credibility of information on the internet.
+
+## 🎯 Idea
+
+The user asks a question, and the AI:
+1. Breaks it down into sub-questions.
+2. Searches for reliable sources on the internet.
+3. Evaluates credibility on a scale of 0-100%.
+4. Assigns a star rating (0-5).
+5. Provides 3 specific reasons for the evaluation.
+
+## 🛠️ Technologies
+
+- **LangChain 1.2.18** – framework for building AI agents
+- **OpenAI API** – GPT models
+- **Tavily** – internet search
+- **ChromaDB** – vector memory
+- **LangFlow** – visual environment
+
+## 📦 Installation
+
+```bash
+# 1. Clone
+git clone https://github.com/your-username/ai-judge.git
+cd ai-judge
+
+# 2. Virtual environment
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# 3. Install dependencies (in this exact order to avoid conflicts)
+pip install langchain==1.2.18
+pip install langchain-community==0.3.0
+pip install langchain-openai==0.2.0
+pip install tavily-python python-dotenv pydantic requests beautifulsoup4 openai chromadb
+
+# 4. Configuration
+cp .env.example .env
+# Enter your API keys in .env
+
+# 5. Run
+python -m src.main
