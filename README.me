@@ -43,3 +43,63 @@ cp .env.example .env
 
 # 5. Run
 python -m src.main
+
+🧠 AI JUDGE — Internet Judge
+📦 Model: gpt-4o-mini
+Type 'exit' to quit.
+
+❓ Ask: Did Elon Musk invent the Internet?
+
+🔍 Agent 1: Research...
+✅ Sub-questions:
+1. Who is the universally recognized inventor of the Internet?
+2. Has Elon Musk ever claimed to have invented the Internet?
+3. In which areas has Elon Musk actually introduced innovations?
+
+🔍 Agent 2: Source Checker...
+✅ Facts and sources:
+Fact: The Internet was invented by Vinton Cerf and Bob Kahn.
+  Source: Wikipedia - History of the Internet - scientific - 2023
+
+🔍 Agent 3: Scoring...
+✅ Final evaluation:
+Truth Score: 0%
+Credibility: ☆☆☆☆☆
+Reasons:
+✓ The Internet was invented in the 1970s.
+✓ Elon Musk was not alive at that time.
+✓ Elon Musk is associated with PayPal, not with the invention of the Internet.
+
+============================================================
+📋 REPORT:
+============================================================
+Truth Score: 0%
+Credibility: ☆☆☆☆☆
+Reasons:
+✓ The Internet was invented in the 1970s.
+✓ Elon Musk was not alive at that time.
+✓ Elon Musk is associated with PayPal, not with the invention of the Internet.
+============================================================
+
+PROJECT STRUCTURE:
+
+AI-JUDGE/
+├── README.md
+├── .env.example
+├── .gitignore
+├── config/
+│   └── openai_config.py
+├── src/
+│   ├── __init__.py
+│   ├── agents.py
+│   ├── memory.py
+│   ├── prompts.py
+│   ├── tools.py
+│   ├── main.py
+│   └── utils.py
+├── examples/
+│   ├── __init__.py
+│   └── example_questions.txt
+└── langflow/
+    └── ai_judge_flow.json
+
