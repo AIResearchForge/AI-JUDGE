@@ -1,8 +1,10 @@
-# 🧠 AI Judge — Internet Judge
+🧠 AI Judge — Internet Judge
 
 An AI agent that evaluates the credibility of information on the internet.
 
-## 🎯 Idea
+The system is built using 'LangChain Agents' with a sequential multi-agent workflow. Each agent specializes in a specific aspect of fact-checking, from breaking down questions to providing a credibility score.
+
+🎯 Idea
 
 The user asks a question, and the AI:
 1. Breaks it down into sub-questions.
@@ -11,75 +13,75 @@ The user asks a question, and the AI:
 4. Assigns a star rating (0-5).
 5. Provides 3 specific reasons for the evaluation.
 
-## 🛠️ Technologies
+🧠 How the Architecture Works
 
-- **LangChain 1.2.18** – framework for building AI agents
-- **OpenAI API** – GPT models
-- **Tavily** – internet search
-- **ChromaDB** – vector memory
-- **LangFlow** – visual environment
+The system uses a **sequential multi-agent workflow** where each agent builds on the output of the previous one:
+[User Question] → [Research Agent] → [Source Checker Agent] → [Scoring Agent] → [Report]
 
-## 📦 Installation
+Key features of this implementation:
+- Specialized Agents: Each agent has a single, well-defined responsibility.
+- Sequential Flow: Information flows from one agent to the next, with each adding value.
+- Tool Integration: The Source Checker uses real-time web search tools (Web Search, URL Reader, Current Date).
+- Memory Base: The Scoring Agent can access previous evaluations via Memory Base.
+- Test of Absurdity: The system recognizes obvious myths and assigns 0% credibility.
 
-```bash
-# 1. Clone
+🛠️ Technologies
+
+- LangChain 1.2.18 – framework for building AI agents
+- OpenAI API – GPT models
+- Tavily – internet search
+- LangFlow – visual environment
+- ChromaDB – vector memory
+
+📦 Installation
+
+1. Clone
 git clone https://github.com/AIResearchForge/AI-JUDGE.git
 cd AI-JUDGE
 
-# 2. Virtual environment
+2. Virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-# venv\Scripts\activate   # Windows
+venv\Scripts\activate   # Windows
 
-# 3. Install dependencies (in this exact order to avoid conflicts)
+3. Install dependencies (in this exact order to avoid conflicts)
 pip install langchain==1.2.18
 pip install langchain-community==0.3.0
 pip install langchain-openai==0.2.0
 pip install tavily-python python-dotenv pydantic requests beautifulsoup4 openai chromadb
 
-# 4. Configuration
-# Edit the .env file and enter your API keys
+4. Configuration
+Edit the .env file and enter your API keys
 
-# 5. Run
+5. Run
 python -m src.main
 
-## 🚀 EXAMPLE USAGE:
+🚀 EXAMPLE USAGE:
 
 🧠 AI JUDGE — Internet Judge
 📦 Model: gpt-4o-mini
 Type 'exit' to quit.
 
-❓ Ask: Did Elon Musk invent the Internet?
+❓ Ask: Was Napoleon short?
 
-🔍 Agent 1: Research...
-✅ Sub-questions:
-1. Who is the universally recognized inventor of the Internet?
-2. Has Elon Musk ever claimed to have invented the Internet?
-3. In which areas has Elon Musk actually introduced innovations?
-
-🔍 Agent 2: Source Checker...
-✅ Facts and sources:
-Fact: The Internet was invented by Vinton Cerf and Bob Kahn.
-  Source: Wikipedia - History of the Internet - scientific - 2023
-
-🔍 Agent 3: Scoring...
-✅ Final evaluation:
-Truth Score: 0%
-Credibility: ☆☆☆☆☆
-Reasons:
-✓ The Internet was invented in the 1970s.
-✓ Elon Musk was not alive at that time.
-✓ Elon Musk is associated with PayPal, not with the invention of the Internet.
+✅ Is the claim true? NO  
+Truth Score: 0%  
+Credibility: ☆☆☆☆☆  
+Reasons:  
+✓ Napoleon Bonaparte's height was approximately 5 feet 6 inches, which is average for his time.  
+✓ The average height of men in early 19th-century France was around 5 feet 5 inches, making him taller than average.  
+✓ The myth of Napoleon being short was largely a result of British propaganda and caricatures.
 
 ============================================================
 📋 REPORT:
 ============================================================
-Truth Score: 0%
-Credibility: ☆☆☆☆☆
-Reasons:
-✓ The Internet was invented in the 1970s.
-✓ Elon Musk was not alive at that time.
-✓ Elon Musk is associated with PayPal, not with the invention of the Internet.
+Is the claim true? NO  
+Truth Score: 0%  
+Credibility: ☆☆☆☆☆  
+Reasons:  
+✓ Napoleon Bonaparte's height was approximately 5 feet 6 inches, which is average for his time.  
+✓ The average height of men in early 19th-century France was around 5 feet 5 inches, making him taller than average.  
+✓ The myth of Napoleon being short was largely a result of British propaganda and caricatures.
 ============================================================
 
 PROJECT STRUCTURE:
@@ -89,18 +91,49 @@ AI-JUDGE/
 ├── .env
 ├── .gitignore
 ├── config/
-│   └── openai_config.py
+│   └── openai_config.py          # OpenAI API configuration
 ├── src/
-│   ├── __init__.py
-│   ├── agents.py
-│   ├── memory.py
-│   ├── prompts.py
-│   ├── tools.py
-│   ├── main.py
-│   └── utils.py
+│   ├── __init__.py               # Package initialization
+│   ├── agents.py                 # LangChain agent definitions (3 agents)
+│   ├── memory.py                 # Simple memory for conversation history
+│   ├── prompts.py                # System prompts for all agents
+│   ├── tools.py                  # Tools (Web Search, URL, Date)
+│   ├── main.py                   # Entry point (CLI)
+│   └── utils.py                  # Utility functions
 ├── examples/
 │   ├── __init__.py
-│   └── example_questions.txt
+│   └── example_questions.txt     # Sample questions for testing
 └── langflow/
-    └── ai_judge_flow.json
+    └── ai_judge_flow.json        # LangFlow export for visual prototyping
+
+🎨 LangFlow Version (GUI):
+
+The project includes a fully functional LangFlow export file: langflow/ai_judge_flow.json
+This allows you to build and test the same workflow visually without writing any code.
+
+To use the LangFlow version:
+
+Import the flow:
+- Run LangFlow in your browser: langflow run - type this in the 'cmd' command line
+- Open your browser at http://localhost:7860
+- Click "Import Flow"
+- Select langflow/business_analyst_flow.json
+
+The visual workflow will load with all 3 agents and their connections
+
+Test in Playground:
+- Enter a question
+- Watch the agents execute step by step in the visual interface
+
+What you can do in LangFlow:
+- Modify agent prompts in real-time
+- Adjust model parameters (temperature, max tokens)
+- Add or remove tools visually
+- Debug the flow step by step
+- Export the modified flow back to JSON
+
+Important difference:
+
+The CLI version uses LangChain Agents with AgentExecutor and is ideal for production deployment.
+The LangFlow (GUI) version is best for prototyping, testing, and demonstrating the workflow to non-technical stakeholders.
 
